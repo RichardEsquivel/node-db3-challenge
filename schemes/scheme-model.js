@@ -51,7 +51,11 @@ function update(obj, id) {
 			return findById(id)
 		})
 }
+//DELETE FROM table_name WHERE condition;
 
-function remove() {
-	return db('schemes')
+function remove(id) {
+	return db('schemes').delete().where({ id })
+		.then(() => {
+			return find()
+		})
 }
