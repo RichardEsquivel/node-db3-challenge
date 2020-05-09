@@ -52,10 +52,16 @@ function update(obj, id) {
 		})
 }
 //DELETE FROM table_name WHERE condition;
-
+//added find by id to return removed id to user
 function remove(id) {
-	return db('schemes').delete().where({ id })
-		.then(() => {
-			return find()
+	return findById(id)
+		.then(scheme => {
+			return db('schemes')
+				.where({ id })
+				.del()
+				.then(schemeDeleted => {
+					return scheme
+				})
 		})
+
 }
